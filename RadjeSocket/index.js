@@ -37,9 +37,17 @@ socket.on("connection", function (socket) {
         console.log("send");
     });
 
+    socket.on("senduser", (data) => {
+        // When a data received from .Net Core, send that data into Vue
+        console.log("Receiving User sent by .Net Core", data);
+        socket.broadcast.emit("receiveuser", data);
+        console.log("senduser");
+    });
+
     socket.on("receive", (data) => {
         console.log("Vue Received: ", data);
     });
+
     socket.on('error', function (err) {
         console.log(err);
     });
